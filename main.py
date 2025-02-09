@@ -7,8 +7,8 @@ from astrbot.api.provider import ProviderRequest
 # 获取当前模块 logger
 logger = logging.getLogger(__name__)
 
-@register("how_to_say", "olaqi", "一个怎么说插件", "1.1.2", "https://github.com/OLAQI/astrbot_plugin_how_to_say")
-class HowToSayPlugin(Star):
+@register("how_to_say", "olaqi", "一个怎么说插件", "1.1.3", "https://github.com/OLAQI/astrbot_plugin_how_to_say")
+class CrazyThursdayPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
 
@@ -37,24 +37,12 @@ class HowToSayPlugin(Star):
             provider = self.context.get_using_provider()
             if provider:
                 try:
-                    # 设置 system_prompt 以改变回复的语气
-                    req = ProviderRequest(text, session_id=event.session_id)
-                    req.system_prompt = "你是一个非常拽的粤语助手。请用非常拽的粤语回答问题。"
-                    
                     # 调用 LLM 大模型
-                    response = await provider.text_chat(req)
+                    response = await provider.text_chat(text, session_id=event.session_id)
                     result_text = response.completion_text
                 except Exception as e:
-                    # 确保错误信息是可序列化的
-                    result_text = f"获取信息失败: {str(e)}"
+                    result_text = f"获取信息失败: {e}"
             else:
                 result_text = "LLM 未启用，请联系管理员。"
 
             yield event.plain_result(result_text)
-
-    @filter.on_llm_request()
-    async def on_llm_request(self, event: AstrMessageEvent, req: ProviderRequest):
-        """
-        在调用 LLM 前，修改请求的 system_prompt。
-        """
-        req.system_prompt = "你是一个非常拽的粤语助手。请用非常拽的粤语回答问题。"
