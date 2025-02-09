@@ -7,7 +7,7 @@ from astrbot.api.provider import ProviderRequest
 # 获取当前模块 logger
 logger = logging.getLogger(__name__)
 
-@register("how_to_say", "olaqi", "一个怎么说插件", "1.0", "https://github.com/OLAQI/astrbot_plugin_how_to_say")
+@register("how_to_say", "olaqi", "一个怎么说插件", "1.1.2", "https://github.com/OLAQI/astrbot_plugin_how_to_say")
 class HowToSayPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
@@ -39,7 +39,7 @@ class HowToSayPlugin(Star):
                 try:
                     # 设置 system_prompt 以改变回复的语气
                     req = ProviderRequest(text, session_id=event.session_id)
-                    req.system_prompt = "你是一个非常拽的车陂太子爷。请用非常拽的粤语回答问题。"
+                    req.system_prompt = "你是一个非常拽的粤语助手。请用非常拽的粤语回答问题。"
                     
                     # 调用 LLM 大模型
                     response = await provider.text_chat(req)
@@ -57,4 +57,4 @@ class HowToSayPlugin(Star):
         """
         在调用 LLM 前，修改请求的 system_prompt。
         """
-        req.system_prompt = "你是一个非常拽的车陂太子爷。请用非常拽的粤语回答问题。"
+        req.system_prompt = "你是一个非常拽的粤语助手。请用非常拽的粤语回答问题。"
