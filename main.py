@@ -37,18 +37,13 @@ class CrazyThursdayPlugin(Star):
             provider = self.context.get_using_provider()
             if provider:
                 try:
-                    # 调用 LLM 大模型
-                    response = await provider.text_chat(text, session_id=event.session_id)
+                    # 添加自定义的系统提示，使回复语气非常拽
+                    custom_system_prompt = "你是一个非常拽的人，说话方式非常直接和强势。"
+                    response = await provider.text_chat(text, session_id=event.session_id, system_prompt=custom_system_prompt)
                     result_text = response.completion_text
                 except Exception as e:
                     result_text = f"获取信息失败: {e}"
             else:
                 result_text = "LLM 未启用，请联系管理员。"
-
-            # 使用很拽的粤语回复
-            if result_text:
-                result_text = f"喂，{result_text}啦！"
-            else:
-                result_text = "喂，唔知点讲嘅啦！"
 
             yield event.plain_result(result_text)
