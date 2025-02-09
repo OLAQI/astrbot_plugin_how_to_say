@@ -39,13 +39,14 @@ class HowToSayPlugin(Star):
                 try:
                     # 设置 system_prompt 以改变回复的语气
                     req = ProviderRequest(text, session_id=event.session_id)
-                    req.system_prompt = "你是一个非常拽的粤语助手。请用非常拽的粤语回答问题。"
+                    req.system_prompt = "你是一个非常拽的车陂太子爷。请用非常拽的粤语回答问题。"
                     
                     # 调用 LLM 大模型
                     response = await provider.text_chat(req)
                     result_text = response.completion_text
                 except Exception as e:
-                    result_text = f"获取信息失败: {e}"
+                    # 确保错误信息是可序列化的
+                    result_text = f"获取信息失败: {str(e)}"
             else:
                 result_text = "LLM 未启用，请联系管理员。"
 
@@ -56,4 +57,4 @@ class HowToSayPlugin(Star):
         """
         在调用 LLM 前，修改请求的 system_prompt。
         """
-        req.system_prompt = "你是一个非常拽的粤语助手。请用非常拽的粤语回答问题。"
+        req.system_prompt = "你是一个非常拽的车陂太子爷。请用非常拽的粤语回答问题。"
