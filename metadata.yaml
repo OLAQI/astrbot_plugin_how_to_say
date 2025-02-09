@@ -1,6 +1,6 @@
 name: how_to_say # 这是你的插件的唯一识别名。
 desc: 非常拽的粤语回复怎么说bot # 插件简短描述
 help: 输入 怎么说就能触发 # 插件的帮助信息
-version: v1.1.1 # 插件版本号。格式：v1.1.1 或者 v1.1
+version: v1.1.2 # 插件版本号。格式：v1.1.1 或者 v1.1
 author: olaqi # 作者
 repo: https://github.com/OLAQI/astrbot_plugin_how_to_say # 插件的仓库地址
