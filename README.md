@@ -1,6 +1,6 @@
 # how_to_say
 
-怎么说插件
+自动监听消息“怎么说”触发自动回复
 
 A template plugin for AstrBot plugin feature
 
